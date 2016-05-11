@@ -3,6 +3,7 @@ package Tanker;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.util.Random;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
@@ -11,6 +12,7 @@ public class ActionField extends JPanel {
 
     private boolean COLORDED_MODE = false;
     private Tank tank;
+    private BT7 agressor;
     private BattleField battleField;
     private Bullet bullet;
 
@@ -112,6 +114,11 @@ public class ActionField extends JPanel {
 
         battleField = new BattleField();
         tank = new Tank(this, battleField);
+
+        Random r = new Random();
+        int randomX = r.nextInt(3)+1;
+
+        agressor = new BT7(this, battleField,randomX*64,0,Direction.DOWN);
         bullet = new Bullet(-100, -100, Direction.NONE);
 
         JFrame frame = new JFrame("BATTLE FIELD, DAY 2");
