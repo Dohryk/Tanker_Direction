@@ -34,21 +34,50 @@ public class ActionField extends JPanel {
     }
 
     private boolean processInterception() throws Exception {
-        String str = getQuadrant(bullet.getX(), bullet.getY());
-        int x = Integer.valueOf(str.substring(0, str.indexOf("_")));
-        int y = Integer.valueOf(str.substring(str.indexOf("_") + 1));
+        String coordinateBullet = getQuadrant(bullet.getX(), bullet.getY());
+        int x = Integer.valueOf(coordinateBullet.substring(0, coordinateBullet.indexOf("_")));
+        int y = Integer.valueOf(coordinateBullet.substring(coordinateBullet.indexOf("_") + 1));
         if ((x >= 0 && x < 9) && (y >= 0 && y < 9)){
             if (!battleField.scanQuadrant(x, y).trim().isEmpty()) {
                 battleField.updateQuadrant(x, y, " ");
                 return true;
-            } else if (str.equals(getQuadrant(agressor.getX(), agressor.getY()))){
-                agressor.destroy();
-                Thread.sleep(bullet.getSpeed());
-                createAgressor();
-                return true;
+            }
+
+            if (bullet.getTank() != agressor) {
+                if (checkInterception(getQuadrant(agressor.getX(), agressor.getY()), coordinateBullet)) {
+                    agressor.destroy();
+                    Thread.sleep(3000);
+                    createAgressor();
+                    return true;
+                }
+            }
+
+            if (bullet.getTank() != defender) {
+                if (checkInterception(getQuadrant(defender.getX(), defender.getY()), coordinateBullet)) {
+                    defender.destroy();
+                    Thread.sleep(3000);
+                    createAgressor();
+                    return true;
+                }
             }
         }
 
+        return false;
+    }
+
+    private boolean checkInterception( String coordinateTank, String coordinateBullet){
+
+        int tank_Y = Integer.parseInt(coordinateTank.split("_")[0]);
+        int tank_X = Integer.parseInt(coordinateTank.split("_")[1]);
+
+        int bullet_Y = Integer.parseInt(coordinateBullet.split("_")[0]);
+        int bullet_X = Integer.parseInt(coordinateBullet.split("_")[1]);
+
+        if ((tank_X >=0) && (tank_X < 9) && (tank_Y >=0) && (tank_Y < 9)) {
+            if (tank_X == bullet_X && tank_Y == bullet_Y){
+                return true;
+            }
+        }
         return false;
     }
 
@@ -124,7 +153,7 @@ public class ActionField extends JPanel {
         defender = new Tank(this, battleField);
 
         createAgressor();
-        bullet = new Bullet(-100, -100, Direction.NONE);
+        bullet = new Bullet(defender, -100, -100, Direction.NONE);
 
         JFrame frame = new JFrame("BATTLE FIELD, DAY 2");
         frame.setLocation(750, 150);
