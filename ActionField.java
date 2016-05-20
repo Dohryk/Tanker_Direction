@@ -12,7 +12,7 @@ public class ActionField extends JPanel {
 
     private boolean COLORDED_MODE = false;
     private Tank defender;
-    private BT7 agressor;
+    private Tiger agressor;
     private BattleField battleField;
     private Bullet bullet;
 
@@ -169,7 +169,7 @@ public class ActionField extends JPanel {
         Random r = new Random();
         int randomX = r.nextInt(3)+1;
 
-        agressor = new BT7(this, battleField,randomX*64,randomX*64,Direction.DOWN);
+        agressor = new Tiger(this, battleField,randomX*64,randomX*64,Direction.DOWN);
     }
 
     @Override
@@ -214,7 +214,7 @@ public class ActionField extends JPanel {
             }
         }
 
-        g.setColor(new Color(255, 129, 23));
+        g.setColor(new Color(255, 52, 210));
         g.fillRect(defender.getX(), defender.getY(), 64, 64);
 
         g.setColor(new Color(0, 255, 0));
