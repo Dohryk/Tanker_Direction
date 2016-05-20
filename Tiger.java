@@ -7,8 +7,8 @@ public class Tiger extends Tank {
     private TankColor color = TankColor.BLACK;
     private int armour = 2;
 
-    Tiger(){
-        super();
+    public Tiger(ActionField actionField, BattleField battleField, int x, int y, Direction direction){
+        super(actionField, battleField, x, y, direction);
     }
 
     public Tiger(int maxSpeed, int crew, TankColor color, int armour){
@@ -21,6 +21,7 @@ public class Tiger extends Tank {
     public int getArmour(){
         return armour;
     }
+
 
     public void printInfo(Tiger tank) {
 
@@ -36,5 +37,14 @@ public class Tiger extends Tank {
     @Override
     public void move() throws Exception {
         super.move();
+    }
+
+    @Override
+    public void destroy() {
+
+        if (armour ==0) {
+            super.destroy();
+        } else armour--;
+
     }
 }
