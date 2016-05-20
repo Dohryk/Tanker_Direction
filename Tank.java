@@ -118,7 +118,7 @@ public class Tank {
     }
 
     void fire() throws Exception {
-        Bullet bullet = new Bullet(x+25, y+25,direction);
+        Bullet bullet = new Bullet(this, x+25, y+25,direction);
         actionField.processFire(bullet);
     }
 
