@@ -5,10 +5,11 @@ public class Bullet {
     private long speed = 5;
     private int x;
     private int y;
+    private Tank tank;
     private Direction direction;
 
-    public Bullet(int x, int y, Direction direction) {
-
+    public Bullet(Tank tank, int x, int y, Direction direction) {
+        this.tank = tank;
         this.x = x;
         this.y = y;
         this.direction = direction;
@@ -41,6 +42,10 @@ public class Bullet {
 
     public void setDirection(Direction direction) {
         this.direction = direction;
+    }
+
+    public Tank getTank() {
+        return tank;
     }
 
     public void destroy(){
