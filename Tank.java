@@ -25,7 +25,7 @@ public class Tank {
     }
 
     public Tank(ActionField actionField, BattleField battleField){
-        this(actionField, battleField, 128, 512, Direction.UP);
+        this(actionField, battleField, 0, 0, Direction.LEFT);
     }
 
     public Tank(ActionField actionField, BattleField battleField, int x, int y, Direction direction){
@@ -34,6 +34,15 @@ public class Tank {
         this.x = x;
         this.y = y;
         this.direction = direction;
+
+        String str = actionField.getQuadrant(x,y);
+        int xQuadrant = Integer.valueOf(str.substring(0, str.indexOf("_")));
+        int yQuadrant = Integer.valueOf(str.substring(str.indexOf("_") + 1));
+        if ((xQuadrant >= 0 && xQuadrant < 9) && (yQuadrant >= 0 && yQuadrant < 9)) {
+            if (!battleField.scanQuadrant(xQuadrant, yQuadrant).trim().isEmpty()) {
+                battleField.updateQuadrant(xQuadrant, yQuadrant, " ");
+            }
+        }
     }
 
     public void turn(Direction direction) throws Exception {
@@ -65,7 +74,7 @@ public class Tank {
     }
 
     public void moveToQuadrant(int v, int h) throws Exception {
-        String str = actionField.getQuadrant(v, h);
+        String str = actionField.getQuadrantXY(v, h);
         int y = Integer.parseInt(str.substring(0, str.indexOf("_")));
         int x = Integer.parseInt(str.substring(str.indexOf("_")+1));
 
@@ -95,13 +104,16 @@ public class Tank {
 
     public void clean() throws Exception {
         moveToQuadrant(1 , 1);
-        for(int i = 2; i<=9; i++){
-            for(int j = 1; j<=9; j++){
-                moveToQuadrant(j, i);
-                if(j==1&&j<=9&&i!=1){
-                    moveToQuadrant(1, i++);
+
+        for(int i = 1; i<=9; i++){
+            moveToQuadrant(1, i);
+            turn(Direction.DOWN);
+            for (int k = 1; k <= 8; k++) {
+                if (battleField.scanQuadrant(k, i - 1) == "B") {
+                    fire();
                 }
             }
+            turn(Direction.LEFT);
         }
     }
 
@@ -140,11 +152,11 @@ public class Tank {
     }
 
     public void updateX(int x) {
-        this.x = x;
+        this.x += x;
     }
 
     public void updateY(int Y){
-        this.y = y;
+        this.y += y;
     }
 
     public int getCrew() {
@@ -161,4 +173,3 @@ public class Tank {
         actionField.repaint();
     }
 }
-
