@@ -1,4 +1,4 @@
-package Tanker;
+package TankGit;
 
 /**
  * Created by vdohryk on 10.05.2016.

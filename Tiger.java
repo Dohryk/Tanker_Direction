@@ -1,13 +1,13 @@
-package Tanker;
+package TankGit;
 
 
-public class Tiger extends Tank {
+public class Tiger extends AbstractTank {
     private int maxSpeed = 72;
     private int crew = 3;
     private TankColor color = TankColor.BLACK;
     private int armour = 2;
 
-    public Tiger(ActionField actionField, BattleField battleField, int x, int y, Direction direction){
+    public Tiger(ActionField actionField, BattleField battleField, int x, int y, Direction direction) throws Exception {
         super(actionField, battleField, x, y, direction);
     }
 

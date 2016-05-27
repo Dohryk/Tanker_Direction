@@ -1,4 +1,4 @@
-package Tanker;
+package TankGit;
 
 public class Launcher {
 

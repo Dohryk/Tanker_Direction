@@ -1,15 +1,15 @@
-package Tanker;
+package TankGit;
 
 public class Bullet {
 
     private long speed = 5;
     private int x;
     private int y;
-    private Tank tank;
+    private AbstractTank Tank;
     private Direction direction;
 
-    public Bullet(Tank tank, int x, int y, Direction direction) {
-        this.tank = tank;
+    public Bullet(AbstractTank Tank, int x, int y, Direction direction) {
+        this.Tank = Tank;
         this.x = x;
         this.y = y;
         this.direction = direction;
@@ -44,8 +44,8 @@ public class Bullet {
         this.direction = direction;
     }
 
-    public Tank getTank() {
-        return tank;
+    public AbstractTank getAbstractTank() {
+        return Tank;
     }
 
     public void destroy(){

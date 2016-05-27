@@ -1,4 +1,4 @@
-package Tanker;
+package TankGit;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -11,7 +11,7 @@ import javax.swing.WindowConstants;
 public class ActionField extends JPanel {
 
     private boolean COLORDED_MODE = false;
-    private Tank defender;
+    private AbstractTank defender;
     private Tiger agressor;
     private BattleField battleField;
     private Bullet bullet;
@@ -29,7 +29,7 @@ public class ActionField extends JPanel {
         defender.fire();*/
     }
 
-    public void processTurn(Tank tank) throws Exception {
+    public void processTurn(AbstractTank abstractTank) throws Exception {
         repaint();
     }
 
@@ -43,7 +43,7 @@ public class ActionField extends JPanel {
                 return true;
             }
 
-            if (bullet.getTank() != agressor) {
+            if (bullet.getAbstractTank() != agressor) {
                 if (checkInterception(getQuadrant(agressor.getX(), agressor.getY()), coordinateBullet)) {
                     agressor.destroy();
                     Thread.sleep(3000);
@@ -52,7 +52,7 @@ public class ActionField extends JPanel {
                 }
             }
 
-            if (bullet.getTank() != defender) {
+            if (bullet.getAbstractTank() != defender) {
                 if (checkInterception(getQuadrant(defender.getX(), defender.getY()), coordinateBullet)) {
                     defender.destroy();
                     Thread.sleep(3000);
@@ -105,37 +105,37 @@ public class ActionField extends JPanel {
         }
     }
 
-    public void processMove(Tank tank) throws Exception {
-        this.defender = tank;
+    public void processMove(AbstractTank abstractTank) throws Exception {
+        this.defender = abstractTank;
         int step = 1;
         int covered = 0;
-        Direction direction = tank.getDirection();
-        int tankY = tank.getY();
-        int tankX = tank.getX();
+        Direction direction = abstractTank.getDirection();
+        int tankY = abstractTank.getY();
+        int tankX = abstractTank.getX();
 
-        if ((direction == Direction.UP && tank.getY() == 0) || (direction == Direction.DOWN && tank.getY() >= 512)
-                || (direction == Direction.LEFT && tank.getX() == 0) || (direction == Direction.RIGHT && tank.getX() >= 512)) {
+        if ((direction == Direction.UP && abstractTank.getY() == 0) || (direction == Direction.DOWN && abstractTank.getY() >= 512)
+                || (direction == Direction.LEFT && abstractTank.getX() == 0) || (direction == Direction.RIGHT && abstractTank.getX() >= 512)) {
             return;
         }
 
-        tank.turn(direction);
+        abstractTank.turn(direction);
 
-        processTurn(tank);
+        processTurn(abstractTank);
 
         while (covered < 64) {
             if (direction == Direction.UP) {
-                tank.updateY(-step);
+                abstractTank.updateY(-step);
             } else if (direction == Direction.DOWN) {
-                tank.updateY(step);
+                abstractTank.updateY(step);
             } else if (direction == Direction.LEFT) {
-                tank.updateX(-step);
+                abstractTank.updateX(-step);
             } else {
-                tank.updateX(step);
+                abstractTank.updateX(step);
             }
             covered += step;
 
             repaint();
-            Thread.sleep(tank.getMaxSpeed());
+            Thread.sleep(abstractTank.getMaxSpeed());
         }
     }
 
@@ -150,7 +150,7 @@ public class ActionField extends JPanel {
     public ActionField() throws Exception {
 
         battleField = new BattleField();
-        defender = new Tank(this, battleField);
+        defender = new T34(this, battleField,0,0, Direction.DOWN);
 
         createAgressor();
         bullet = new Bullet(defender, -100, -100, Direction.NONE);
@@ -165,7 +165,7 @@ public class ActionField extends JPanel {
         frame.setVisible(true);
     }
 
-    private void createAgressor(){
+    private void createAgressor() throws Exception {
         Random r = new Random();
         int randomX = r.nextInt(3)+1;
 

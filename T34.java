@@ -1,11 +1,11 @@
-package Tanker;
+package TankGit;
 
-public class T34 extends Tank{
+public class T34 extends AbstractTank {
     private int maxSpeed = 50;
     private int crew = 4;
     private TankColor color = TankColor.GREEN;
 
-    public T34(ActionField actionField, BattleField battleField, int x, int y, Direction direction){
+    public T34(ActionField actionField, BattleField battleField, int x, int y, Direction direction) throws Exception {
         super(actionField, battleField, x, y, direction);
     }
     public T34(int maxSpeed, int crew, TankColor color){

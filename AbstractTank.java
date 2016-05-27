@@ -1,8 +1,8 @@
-package Tanker;
+package TankGit;
 
 import java.util.Random;
 
-public class Tank {
+public abstract class AbstractTank {
 
     public int maxSpeed;
     private int crew;
@@ -14,21 +14,21 @@ public class Tank {
     public ActionField actionField;
     public BattleField battleField;
 
-    public Tank(){
+    public AbstractTank(){
 
     }
 
-    public Tank(int maxSpeed, int crew, TankColor color){
+    public AbstractTank(int maxSpeed, int crew, TankColor color){
         this.maxSpeed = maxSpeed;
         this.crew = crew;
         this.color = color;
     }
 
-    public Tank(ActionField actionField, BattleField battleField){
+    public AbstractTank(ActionField actionField, BattleField battleField) throws Exception {
         this(actionField, battleField, 0, 0, Direction.LEFT);
     }
 
-    public Tank(ActionField actionField, BattleField battleField, int x, int y, Direction direction){
+    public AbstractTank(ActionField actionField, BattleField battleField, int x, int y, Direction direction) throws Exception {
         this.actionField = actionField;
         this.battleField = battleField;
         this.x = x;

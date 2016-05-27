@@ -1,12 +1,14 @@
-package Tanker;
+package TankGit;
 
-public class BT7 extends Tank {
-
+/**
+ * Created by vdohryk on 27.05.2016.
+ */
+public class BT7 extends AbstractTank {
     private int maxSpeed = 72;
     private int crew = 3;
     private TankColor color = TankColor.BLACK;
 
-    public BT7(ActionField actionField, BattleField battleField, int x, int y, Direction direction){
+    public BT7(ActionField actionField, BattleField battleField, int x, int y, Direction direction) throws Exception {
         super(actionField, battleField, x, y, direction);
     }
 
@@ -31,5 +33,4 @@ public class BT7 extends Tank {
     public void move() throws Exception {
         super.move();
     }
-
 }
