@@ -1,8 +1,10 @@
 package TankGit;
 
+import Shapes.GIT.Drawable;
+
 import java.util.Random;
 
-public abstract class AbstractTank {
+public abstract class AbstractTank implements Drawable, Destroyable{
 
     public int maxSpeed;
     private int crew;

@@ -1,6 +1,8 @@
 package TankGit;
 
 
+import java.awt.*;
+
 public class Tiger extends AbstractTank {
     private int maxSpeed = 72;
     private int crew = 3;
@@ -45,6 +47,10 @@ public class Tiger extends AbstractTank {
         if (armour ==0) {
             super.destroy();
         } else armour--;
+
+    }
+
+    public void draw(Graphics graphics) {
 
     }
 }

@@ -214,7 +214,10 @@ public class ActionField extends JPanel {
             }
         }
 
+        defender.draw(g);
+        /*
         g.setColor(new Color(255, 52, 210));
+
         g.fillRect(defender.getX(), defender.getY(), 64, 64);
 
         g.setColor(new Color(0, 255, 0));
@@ -226,7 +229,8 @@ public class ActionField extends JPanel {
             g.fillRect(defender.getX(), defender.getY() + 20, 34, 24);
         } else {
             g.fillRect(defender.getX() + 30, defender.getY() + 20, 34, 24);
-        }
+        }*/
+
 
         g.setColor(new Color(255, 0, 0));
         g.fillRect(agressor.getX(), agressor.getY(), 64, 64);

@@ -1,5 +1,7 @@
 package TankGit;
 
+import java.awt.*;
+
 /**
  * Created by vdohryk on 27.05.2016.
  */
@@ -32,5 +34,9 @@ public class BT7 extends AbstractTank {
     @Override
     public void move() throws Exception {
         super.move();
+    }
+
+    public void draw(Graphics graphics) {
+
     }
 }
