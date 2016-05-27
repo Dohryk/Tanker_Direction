@@ -213,38 +213,11 @@ public class ActionField extends JPanel {
                 }
             }
         }
-
-        defender.draw(g);
-        /*
         g.setColor(new Color(255, 52, 210));
-
-        g.fillRect(defender.getX(), defender.getY(), 64, 64);
-
-        g.setColor(new Color(0, 255, 0));
-        if (defender.getDirection() == Direction.UP) {
-            g.fillRect(defender.getX() + 20, defender.getY(), 24, 34);
-        } else if (defender.getDirection() == Direction.DOWN) {
-            g.fillRect(defender.getX() + 20, defender.getY() + 30, 24, 34);
-        } else if (defender.getDirection() == Direction.LEFT) {
-            g.fillRect(defender.getX(), defender.getY() + 20, 34, 24);
-        } else {
-            g.fillRect(defender.getX() + 30, defender.getY() + 20, 34, 24);
-        }*/
-
+        defender.draw(g);
 
         g.setColor(new Color(255, 0, 0));
-        g.fillRect(agressor.getX(), agressor.getY(), 64, 64);
-
-        g.setColor(new Color(0, 255, 0));
-        if (agressor.getDirection() == Direction.UP) {
-            g.fillRect(agressor.getX() + 20, agressor.getY(), 24, 34);
-        } else if (agressor.getDirection() == Direction.DOWN) {
-            g.fillRect(agressor.getX() + 20, agressor.getY() + 30, 24, 34);
-        } else if (agressor.getDirection() == Direction.LEFT) {
-            g.fillRect(agressor.getX(), agressor.getY() + 20, 34, 24);
-        } else {
-            g.fillRect(agressor.getX() + 30, agressor.getY() + 20, 34, 24);
-        }
+        agressor.draw(g);
 
         g.setColor(new Color(255, 255, 0));
         g.fillRect(bullet.getX(), bullet.getY(), 14, 14);

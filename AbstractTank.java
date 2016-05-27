@@ -2,6 +2,7 @@ package TankGit;
 
 import Shapes.GIT.Drawable;
 
+import java.awt.*;
 import java.util.Random;
 
 public abstract class AbstractTank implements Drawable, Destroyable{
@@ -124,7 +125,6 @@ public abstract class AbstractTank implements Drawable, Destroyable{
         actionField.processFire(bullet);
     }
 
-
     public Direction getDirection() {
         return direction;
     }
@@ -173,5 +173,21 @@ public abstract class AbstractTank implements Drawable, Destroyable{
         this.updateX(-1000);
         this.updateY(-1000);
         actionField.repaint();
+    }
+
+    public void draw(Graphics g) {
+
+        g.fillRect(getX(), getY(), 64, 64);
+
+        g.setColor(new Color(0, 255, 0));
+        if (getDirection() == Direction.UP) {
+            g.fillRect(getX() + 20, getY(), 24, 34);
+        } else if (getDirection() == Direction.DOWN) {
+            g.fillRect(getX() + 20, getY() + 30, 24, 34);
+        } else if (getDirection() == Direction.LEFT) {
+            g.fillRect(getX(), getY() + 20, 34, 24);
+        } else {
+            g.fillRect(getX() + 30, getY() + 20, 34, 24);
+        }
     }
 }

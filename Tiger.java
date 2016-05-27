@@ -50,7 +50,4 @@ public class Tiger extends AbstractTank {
 
     }
 
-    public void draw(Graphics graphics) {
-
-    }
 }

@@ -32,20 +32,4 @@ public class T34 extends AbstractTank {
         super.move();
     }
 
-    public void draw(Graphics g) {
-        g.setColor(new Color(255, 52, 210));
-
-        g.fillRect(getX(), getY(), 64, 64);
-
-        g.setColor(new Color(0, 255, 0));
-        if (getDirection() == Direction.UP) {
-            g.fillRect(getX() + 20, getY(), 24, 34);
-        } else if (getDirection() == Direction.DOWN) {
-            g.fillRect(getX() + 20, getY() + 30, 24, 34);
-        } else if (getDirection() == Direction.LEFT) {
-            g.fillRect(getX(), getY() + 20, 34, 24);
-        } else {
-            g.fillRect(getX() + 30, getY() + 20, 34, 24);
-        }
-    }
 }

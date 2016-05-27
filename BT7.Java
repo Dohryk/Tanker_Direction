@@ -36,7 +36,4 @@ public class BT7 extends AbstractTank {
         super.move();
     }
 
-    public void draw(Graphics graphics) {
-
-    }
 }
