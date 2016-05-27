@@ -9,7 +9,8 @@ public abstract class AbstractTank implements Drawable, Destroyable{
 
     public int maxSpeed;
     private int crew;
-    private TankColor color;
+    protected Color tankColor;
+    protected Color towerColor;
     private Direction direction;
     private int x;
     public int y;
@@ -21,10 +22,10 @@ public abstract class AbstractTank implements Drawable, Destroyable{
 
     }
 
-    public AbstractTank(int maxSpeed, int crew, TankColor color){
+    public AbstractTank(int maxSpeed, int crew, Color color){
         this.maxSpeed = maxSpeed;
         this.crew = crew;
-        this.color = color;
+        this.tankColor = color;
     }
 
     public AbstractTank(ActionField actionField, BattleField battleField) throws Exception {
@@ -165,8 +166,8 @@ public abstract class AbstractTank implements Drawable, Destroyable{
         return crew;
     }
 
-    public TankColor getColor() {
-        return color;
+    public Color getTankColor() {
+        return tankColor;
     }
 
     public void destroy(){
@@ -177,9 +178,10 @@ public abstract class AbstractTank implements Drawable, Destroyable{
 
     public void draw(Graphics g) {
 
+        g.setColor(tankColor);
         g.fillRect(getX(), getY(), 64, 64);
 
-        g.setColor(new Color(0, 255, 0));
+        g.setColor(towerColor);
         if (getDirection() == Direction.UP) {
             g.fillRect(getX() + 20, getY(), 24, 34);
         } else if (getDirection() == Direction.DOWN) {

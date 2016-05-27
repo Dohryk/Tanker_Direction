@@ -1,6 +1,10 @@
 package TankGit;
 
-public class Bullet {
+import Shapes.GIT.Drawable;
+
+import java.awt.*;
+
+public class Bullet implements Drawable, Destroyable {
 
     private long speed = 5;
     private int x;
@@ -13,7 +17,6 @@ public class Bullet {
         this.x = x;
         this.y = y;
         this.direction = direction;
-
     }
 
     public int getX(){
@@ -51,5 +54,11 @@ public class Bullet {
     public void destroy(){
         this.x = -100;
         this.y = -100;
+    }
+
+    @Override
+    public void draw(Graphics graphics) {
+        graphics.setColor(new Color(255, 255, 0));
+        graphics.fillRect(getX(), getY(), 14, 14);
     }
 }

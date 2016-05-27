@@ -219,8 +219,7 @@ public class ActionField extends JPanel {
         g.setColor(new Color(255, 0, 0));
         agressor.draw(g);
 
-        g.setColor(new Color(255, 255, 0));
-        g.fillRect(bullet.getX(), bullet.getY(), 14, 14);
+        bullet.draw(g);
     }
 }
 
