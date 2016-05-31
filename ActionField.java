@@ -1,5 +1,14 @@
 package TankGit;
 
+
+import TankGit.GraficsInterface.Brick;
+import TankGit.GraficsInterface.Eagle;
+import TankGit.GraficsInterface.Rock;
+import TankGit.GraficsInterface.Water;
+import TankGit.Tanks.AbstractTank;
+import TankGit.Tanks.T34;
+import TankGit.Tanks.Tiger;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -15,18 +24,16 @@ public class ActionField extends JPanel {
     private Tiger agressor;
     private BattleField battleField;
     private Bullet bullet;
+    private Eagle eagle;
 
     public void runTheGame() throws Exception {
         //defender.moveRandom();
-        defender.clean();
-        /*defender.fire();
-        defender.move();
-		defender.fire();
-        defender.move();
-		defender.fire();
-        defender.turn(3);
-        defender.move();
-        defender.fire();*/
+        //defender.clean();
+
+        while (true) {
+            defender.moveRandom();
+            agressor.moveRandom();
+        }
     }
 
     public void processTurn(AbstractTank abstractTank) throws Exception {
@@ -38,15 +45,25 @@ public class ActionField extends JPanel {
         int x = Integer.valueOf(coordinateBullet.substring(0, coordinateBullet.indexOf("_")));
         int y = Integer.valueOf(coordinateBullet.substring(coordinateBullet.indexOf("_") + 1));
         if ((x >= 0 && x < 9) && (y >= 0 && y < 9)){
-            if (!battleField.scanQuadrant(x, y).trim().isEmpty()) {
-                battleField.updateQuadrant(x, y, " ");
+            String valueQuadrant = battleField.scanQuadrant(x, y);
+            if (!valueQuadrant.trim().isEmpty()) {
+                if (valueQuadrant == "B"){
+                    battleField.updateQuadrant(x, y, " ");
+                } else if (valueQuadrant == "W"){
+                    return false;
+                } else if (valueQuadrant == "E" && eagle != null) {
+                    eagle.destroy();
+                } else if (valueQuadrant == "R" && bullet.getAbstractTank() instanceof Tiger){
+                    battleField.updateQuadrant(x, y, " ");
+                }
+
                 return true;
             }
 
             if (bullet.getAbstractTank() != agressor) {
                 if (checkInterception(getQuadrant(agressor.getX(), agressor.getY()), coordinateBullet)) {
                     agressor.destroy();
-                    Thread.sleep(3000);
+                    Thread.sleep(1000);
                     createAgressor();
                     return true;
                 }
@@ -55,13 +72,12 @@ public class ActionField extends JPanel {
             if (bullet.getAbstractTank() != defender) {
                 if (checkInterception(getQuadrant(defender.getX(), defender.getY()), coordinateBullet)) {
                     defender.destroy();
-                    Thread.sleep(3000);
-                    createAgressor();
+                    Thread.sleep(1000);
+                    createDefender();
                     return true;
                 }
             }
         }
-
         return false;
     }
 
@@ -106,7 +122,7 @@ public class ActionField extends JPanel {
     }
 
     public void processMove(AbstractTank abstractTank) throws Exception {
-        this.defender = abstractTank;
+        //this.defender = abstractTank;
         int step = 1;
         int covered = 0;
         Direction direction = abstractTank.getDirection();
@@ -150,8 +166,8 @@ public class ActionField extends JPanel {
     public ActionField() throws Exception {
 
         battleField = new BattleField();
-        defender = new T34(this, battleField,0,0, Direction.DOWN);
-
+        //defender = new T34(this, battleField,0,0, Direction.DOWN);
+        createDefender();
         createAgressor();
         bullet = new Bullet(defender, -100, -100, Direction.NONE);
 
@@ -169,7 +185,14 @@ public class ActionField extends JPanel {
         Random r = new Random();
         int randomX = r.nextInt(3)+1;
 
-        agressor = new Tiger(this, battleField,randomX*64,randomX*64,Direction.DOWN);
+        agressor = new Tiger(this, battleField,randomX*64,0,Direction.DOWN);
+    }
+
+    private void createDefender() throws Exception {
+        Random r = new Random();
+        int randomX = r.nextInt(3)+1;
+
+        defender = new T34(this, battleField,128,512, Direction.UP);
     }
 
     @Override
@@ -187,7 +210,7 @@ public class ActionField extends JPanel {
                         cc = new Color(233, 243, 255);
                     }
                 } else {
-                    cc = new Color(180, 180, 180);
+                    cc = new Color(249, 255, 243);
                 }
                 i++;
                 g.setColor(cc);
@@ -198,6 +221,7 @@ public class ActionField extends JPanel {
         for (int j = 0; j < battleField.getDimetionY(); j++) {
             for (int k = 0; k < battleField.getDimetionX(); k++) {
                 try {
+                    //brick
                     if (battleField.scanQuadrant(j, k).equals("B")) {
                         String coordinates = getQuadrantXY(j + 1, k + 1);
                         int separator = coordinates.indexOf("_");
@@ -205,14 +229,51 @@ public class ActionField extends JPanel {
                                 .substring(0, separator));
                         int x = Integer.parseInt(coordinates
                                 .substring(separator + 1));
-                        g.setColor(new Color(0, 0, 255));
-                        g.fillRect(x, y, 64, 64);
+                        Brick brick = new Brick(battleField, x,y);
+                        brick.draw(g);
+                    }
+
+                    //Water
+                    if (battleField.scanQuadrant(j, k).equals("W")) {
+                        String coordinates = getQuadrantXY(j + 1, k + 1);
+                        int separator = coordinates.indexOf("_");
+                        int y = Integer.parseInt(coordinates
+                                .substring(0, separator));
+                        int x = Integer.parseInt(coordinates
+                                .substring(separator + 1));
+                        Water water = new Water(battleField, x,y);
+                        water.draw(g);
+                    }
+
+                    //Rock
+                    if (battleField.scanQuadrant(j, k).equals("R")) {
+                        String coordinates = getQuadrantXY(j + 1, k + 1);
+                        int separator = coordinates.indexOf("_");
+                        int y = Integer.parseInt(coordinates
+                                .substring(0, separator));
+                        int x = Integer.parseInt(coordinates
+                                .substring(separator + 1));
+                        Rock rock = new Rock(battleField, x,y);
+                        rock.draw(g);
+                    }
+
+                    //EAGLE
+                    if (battleField.scanQuadrant(j, k).equals("E")) {
+                        String coordinates = getQuadrantXY(j + 1, k + 1);
+                        int separator = coordinates.indexOf("_");
+                        int y = Integer.parseInt(coordinates
+                                .substring(0, separator));
+                        int x = Integer.parseInt(coordinates
+                                .substring(separator + 1));
+                        eagle = new Eagle(battleField, x,y);
+                        eagle.draw(g);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         }
+
         g.setColor(new Color(255, 52, 210));
         defender.draw(g);
 

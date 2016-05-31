@@ -1,4 +1,4 @@
-package TankGit;
+package TankGit.Tanks;
 
 /**
  * Created by vdohryk on 27.05.2016.

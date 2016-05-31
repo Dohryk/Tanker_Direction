@@ -1,11 +1,12 @@
-package TankGit;
+package TankGit.Tanks;
 
 import Shapes.GIT.Drawable;
+import TankGit.*;
 
 import java.awt.*;
 import java.util.Random;
 
-public abstract class AbstractTank implements Drawable, Destroyable{
+public abstract class AbstractTank implements Drawable, Destroyable {
 
     public int maxSpeed;
     private int crew;
@@ -13,7 +14,7 @@ public abstract class AbstractTank implements Drawable, Destroyable{
     protected Color towerColor;
     private Direction direction;
     private int x;
-    public int y;
+    private int y;
 
     public ActionField actionField;
     public BattleField battleField;
@@ -60,7 +61,7 @@ public abstract class AbstractTank implements Drawable, Destroyable{
 
     public void moveRandom() throws Exception {
         Random r = new Random();
-        while (true){
+        //while (true){
             int randomDirection = r.nextInt(5);
             if (randomDirection > 0){
                 if (randomDirection==1){
@@ -73,8 +74,10 @@ public abstract class AbstractTank implements Drawable, Destroyable{
                     turn(Direction.RIGHT);
                 }
                 move();
+                fire();
+                Thread.sleep(1000);
             }
-        }
+        //}
     }
 
     public void moveToQuadrant(int v, int h) throws Exception {
@@ -121,7 +124,7 @@ public abstract class AbstractTank implements Drawable, Destroyable{
         }
     }
 
-    void fire() throws Exception {
+    public void fire() throws Exception {
         Bullet bullet = new Bullet(this, x+25, y+25,direction);
         actionField.processFire(bullet);
     }
@@ -158,7 +161,7 @@ public abstract class AbstractTank implements Drawable, Destroyable{
         this.x += x;
     }
 
-    public void updateY(int Y){
+    public void updateY(int y){
         this.y += y;
     }
 

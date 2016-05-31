@@ -1,4 +1,8 @@
-package TankGit;
+package TankGit.Tanks;
+
+import TankGit.ActionField;
+import TankGit.BattleField;
+import TankGit.Direction;
 
 import java.awt.*;
 

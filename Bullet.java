@@ -1,6 +1,7 @@
 package TankGit;
 
 import Shapes.GIT.Drawable;
+import TankGit.Tanks.AbstractTank;
 
 import java.awt.*;
 

@@ -1,12 +1,14 @@
 package TankGit;
 
+import TankGit.Tanks.AbstractTank;
+
 import java.awt.*;
 
 /**
  * Created by vdohryk on 27.05.2016.
  */
 public interface Drowable {
-    public void draw(Graphics g, AbstractTank tank);
+    public void draw(Graphics g);
     /*
     public static void draw(Graphics g, AbstractTank tank){
         g.setColor(new Color(255, 52, 210));
