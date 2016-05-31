@@ -2,6 +2,7 @@ package TankGit.Tanks;
 
 import Shapes.GIT.Drawable;
 import TankGit.*;
+import TankGit.Interfaces.Destroyable;
 
 import java.awt.*;
 import java.util.Random;

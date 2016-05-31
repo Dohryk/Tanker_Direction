@@ -1,4 +1,4 @@
-package TankGit;
+package TankGit.Interfaces;
 
 import TankGit.Tanks.AbstractTank;
 

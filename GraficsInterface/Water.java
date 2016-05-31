@@ -2,7 +2,7 @@ package TankGit.GraficsInterface;
 
 import Shapes.GIT.Drawable;
 import TankGit.BattleField;
-import TankGit.Destroyable;
+import TankGit.Interfaces.Destroyable;
 
 import java.awt.*;
 
