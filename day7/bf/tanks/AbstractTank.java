@@ -14,7 +14,7 @@ public abstract class AbstractTank implements Tank {
 	
 	private int speed = 10;
 	protected int movePath = 1;
-	protected Image image;
+	protected Image[] image;
 	protected String tankName;
 	private static String IMAGE_NAME = "D:\\PAndA\\My_Java\\Tanker\\src\\TankGit\\day7\\img\\";
 
@@ -32,40 +32,22 @@ public abstract class AbstractTank implements Tank {
 	protected Color tankColor;
 	protected Color towerColor;
 	
-	public AbstractTank(BattleField bf, String tankName) {
-		this(bf, 128, 512, Direction.UP, tankName);
+	public AbstractTank(BattleField bf) {
+		this(bf, 128, 512, Direction.UP);
 	}
 	
-	public AbstractTank(BattleField bf, int x, int y, Direction direction, String tankName) {
+	public AbstractTank(BattleField bf, int x, int y, Direction direction) {
 		this.bf = bf;
 		this.x = x;
 		this.y = y;
 		this.direction = direction;
 		this.destroyed = false;
-		this.tankName = tankName;
 		turn(direction);
 	}
 
 	public void turn(Direction direction) {
 		this.direction = direction;
-		if (tankName!="") {
-			String fileName = IMAGE_NAME;
-			if (direction == Direction.RIGHT) {
-				fileName += tankName+"_right.png";
-			} else if (direction == Direction.DOWN){
-				fileName += tankName+"_down.png";
-			}else if (direction == Direction.LEFT) {
-				fileName += tankName + "_left.png";
-			} else {
-				fileName += tankName+"_up.png";
-			}
 
-			try {
-				image = ImageIO.read(new File(fileName));
-			} catch (IOException e) {
-				System.err.println("Can't find image of tank: " + fileName);
-			}
-		}
 	}
 
 	public void move() {
@@ -95,7 +77,7 @@ public abstract class AbstractTank implements Tank {
 			g.setColor(tankColor);
 
 			if (image != null) {
-				g.drawImage(image,x,y, new ImageObserver() {
+				g.drawImage(image[getDirection().getId()],x,y, new ImageObserver() {
 					@Override
 					public boolean imageUpdate(Image img, int infoflags, int x, int y, int width, int height) {
 						return false;
