@@ -8,13 +8,13 @@ import TankGit.day7.bf.BattleField;
 public class T34 extends AbstractTank {
 	
 	public T34(BattleField bf) {
-		super(bf, 128, 512, Direction.UP);
+		super(bf, 128, 512, Direction.UP, "t34");
 		tankColor = new Color(0, 255, 0);
 		towerColor = new Color(200, 65, 194);
 	}
 	
 	public T34(BattleField bf, int x, int y, Direction direction) {
-		super(bf, x, y, direction);
+		super(bf, x, y, direction, "t34");
 		tankColor = new Color(0, 255, 0);
 		towerColor = new Color(200, 65, 194);
 	}

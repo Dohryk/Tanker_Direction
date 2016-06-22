@@ -232,7 +232,7 @@ public class ActionField extends JPanel {
 						cc = new Color(233, 243, 255);
 					}
 				} else {
-					cc = new Color(180, 180, 180);
+					cc = new Color(0, 0, 0);
 				}
 				i++;
 				g.setColor(cc);

@@ -1,7 +1,7 @@
 package TankGit.day7.bf;
 
-import java.awt.Color;
-import java.awt.Graphics;
+import java.awt.*;
+import java.awt.image.ImageObserver;
 
 
 public abstract class SimpleBFObject implements BFObject {
@@ -9,6 +9,7 @@ public abstract class SimpleBFObject implements BFObject {
 	// current position on BF
 	private int x;
 	private int y;
+	protected Image image;
 	
 	protected Color color;
 
@@ -28,7 +29,16 @@ public abstract class SimpleBFObject implements BFObject {
 	public void draw(Graphics g) {
 		if (!isDestroyed) {
 			g.setColor(this.color);
-			g.fillRect(this.getX(), this.getY(), 64, 64);
+			if (image!=null){
+				g.drawImage(image,x,y, new ImageObserver() {
+					@Override
+					public boolean imageUpdate(Image img, int infoflags, int x, int y, int width, int height) {
+						return false;
+					}
+				});
+			} else {
+				g.fillRect(this.getX(), this.getY(), 64, 64);
+			}
 		}
 	}
 	
