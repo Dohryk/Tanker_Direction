@@ -36,8 +36,8 @@ public class ActionField extends JPanel {
 		while (true) {
 			if (!aggressor.isDestroyed() && !defender.isDestroyed()) {
 				processAction(aggressor.setUp(), aggressor);
-			}
-			if (!aggressor.isDestroyed() && !defender.isDestroyed()) {
+			//}
+			//if (!aggressor.isDestroyed() && !defender.isDestroyed()) {
 				processAction(defender.setUp(), defender);
 			}
 		}

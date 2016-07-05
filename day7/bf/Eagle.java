@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class Eagle extends SimpleBFObject {
-	private final static String IMAGE_NAME = "D:\\PAndA\\My_Java\\Tanker\\src\\TankGit\\day7\\img\\eagle.png";
+	private final static String IMAGE_NAME = "src/TankGit/day7/img/eagle.png";
 
 	public Eagle(int x, int y) {
 		super(x, y);

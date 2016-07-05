@@ -5,6 +5,7 @@ import java.awt.image.ImageObserver;
 import java.io.File;
 import java.io.IOException;
 
+import TankGit.day7.ActionField;
 import TankGit.day7.Direction;
 import TankGit.day7.bf.BattleField;
 
@@ -16,6 +17,7 @@ public abstract class AbstractTank implements Tank {
 	protected int movePath = 1;
 	protected Image[] image;
 	protected String tankName;
+	protected ActionField actionField;
 	private static String IMAGE_NAME = "D:\\PAndA\\My_Java\\Tanker\\src\\TankGit\\day7\\img\\";
 
 	// 1 - up, 2 - down, 3 - left, 4 - right

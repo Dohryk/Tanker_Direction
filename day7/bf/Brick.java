@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class Brick extends SimpleBFObject {
-	private final static String IMAGE_NAME = "D:\\PAndA\\My_Java\\Tanker\\src\\TankGit\\day7\\img\\brick.png";
+	private final static String IMAGE_NAME = "src/TankGit/day7/img/brick.png";
 
 	public Brick(int x, int y) {
 		super(x, y);

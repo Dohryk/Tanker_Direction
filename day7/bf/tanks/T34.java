@@ -38,10 +38,10 @@ public class T34 extends AbstractTank {
 	private void setImages(){
 		image = new Image[4];
 		try {
-			image[0]= ImageIO.read(new File("D:\\PAndA\\My_Java\\Tanker\\src\\TankGit\\day7\\img\\t34_up.png").getAbsoluteFile());
-			image[1]= ImageIO.read(new File("D:\\PAndA\\My_Java\\Tanker\\src\\TankGit\\day7\\img\\t34_down.png").getAbsoluteFile());
-			image[2]= ImageIO.read(new File("D:\\PAndA\\My_Java\\Tanker\\src\\TankGit\\day7\\img\\t34_left.png").getAbsoluteFile());
-			image[3]= ImageIO.read(new File("D:\\PAndA\\My_Java\\Tanker\\src\\TankGit\\day7\\img\\t34_right.png").getAbsoluteFile());
+			image[0]= ImageIO.read(new File("src/TankGit/day7/img/t34_up.png").getAbsoluteFile());
+			image[1]= ImageIO.read(new File("src/TankGit/day7/img/t34_down.png").getAbsoluteFile());
+			image[2]= ImageIO.read(new File("src/TankGit/day7/img/t34_left.png").getAbsoluteFile());
+			image[3]= ImageIO.read(new File("src/TankGit/day7/img/t34_right.png").getAbsoluteFile());
 		} catch (IOException e) {
 			System.err.println("Can't find image of tank");
 		}
