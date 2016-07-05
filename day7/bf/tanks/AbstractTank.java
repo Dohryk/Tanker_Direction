@@ -18,7 +18,7 @@ public abstract class AbstractTank implements Tank {
 	protected Image[] image;
 	protected String tankName;
 	protected ActionField actionField;
-	private static String IMAGE_NAME = "D:\\PAndA\\My_Java\\Tanker\\src\\TankGit\\day7\\img\\";
+	private static String IMAGE_NAME = "src/TankGit/day7/img/";
 
 	// 1 - up, 2 - down, 3 - left, 4 - right
 	private Direction direction;
